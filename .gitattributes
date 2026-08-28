@@ -1,9 +1,0 @@
-.conversation/attached_assets/saaala_1787927305533.zip filter=lfs diff=lfs merge=lfs -text
-artifacts/yolo-pose/models/yolo26l-pose.pt filter=lfs diff=lfs merge=lfs -text
-artifacts/yolo-pose/public/models/yolo26l-pose.onnx filter=lfs diff=lfs merge=lfs -text
-*.onnx filter=lfs diff=lfs merge=lfs -text
-models/*.onnx filter=lfs diff=lfs merge=lfs -text
-models/*.pt filter=lfs diff=lfs merge=lfs -text
-ort/*.wasm filter=lfs diff=lfs merge=lfs -text
-*.pt filter=lfs diff=lfs merge=lfs -text
-*.wasm filter=lfs diff=lfs merge=lfs -text
