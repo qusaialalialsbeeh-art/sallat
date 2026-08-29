@@ -4,7 +4,7 @@ import {
   drawPoseOverlay,
   loadPoseModel,
   type PoseFrame,
-} from "@/lib/pose";
+} from "./pose";
 type PoseCanvasProps = {
   videoRef: RefObject<HTMLVideoElement | null>;
   active: boolean;
