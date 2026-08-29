@@ -1,68 +1,40 @@
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import {
-  Eye,
-  Info,
-  ScanFace,
-  ShieldCheck,
-} from 'lucide-react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { Camera, RefreshCcw, ShieldCheck, ScanFace } from 'lucide-react';
 import { CameraView } from './CameraView';
-import { ControlPanel } from './ControlPanel';
-import { StatusPanel } from './StatusPanel';
 import {
   CameraAccessError,
   type CameraFacing,
   requestCameraStream,
   stopCameraStream,
 } from './camera';
-import {
-  getBrowserSnapshot,
-  usePerformanceStats,
-} from './performance';
-import './index.css';
 function App() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [stream, setStream] =
-    useState<MediaStream | null>(null);
+  const [stream, setStream] = useState<MediaStream | null>(null);
   const [facing, setFacing] =
     useState<CameraFacing>('environment');
-  const [loading, setLoading] =
-    useState(false);
-  const [cameraError, setCameraError] =
-    useState('');
-  const [stats, registerFrame] =
-    usePerformanceStats(Boolean(stream));
-  const browser = useMemo(
-    () => getBrowserSnapshot(),
-    [],
-  );
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   useEffect(() => {
-    document.title = 'مراقب الوضعية — مختبر الصلاة';
+    document.title = 'مختبر الصلاة — YOLO26L';
     return () => {
       stopCameraStream(stream);
     };
   }, [stream]);
   const startCamera = useCallback(async () => {
     setLoading(true);
-    setCameraError('');
+    setError('');
     try {
-      const nextStream =
-        await requestCameraStream(facing);
+      const nextStream = await requestCameraStream(facing);
       setStream((previous) => {
         stopCameraStream(previous);
         return nextStream;
       });
-    } catch (error) {
-      setCameraError(
-        error instanceof CameraAccessError
-          ? error.message
-          : 'تعذّر تشغيل الكاميرا. تحقق من الأذونات وحاول مرة أخرى.',
-      );
+    } catch (err) {
+      if (err instanceof CameraAccessError) {
+        setError(err.message);
+      } else {
+        setError('تعذر تشغيل الكاميرا. حاول مرة أخرى.');
+      }
     } finally {
       setLoading(false);
     }
@@ -72,15 +44,15 @@ function App() {
       stopCameraStream(current);
       return null;
     });
-    setCameraError('');
+    setError('');
   }, []);
   const switchCamera = useCallback(async () => {
-    const nextFacing: CameraFacing =
+    const nextFacing =
       facing === 'environment'
         ? 'user'
         : 'environment';
     setLoading(true);
-    setCameraError('');
+    setError('');
     setStream((current) => {
       stopCameraStream(current);
       return null;
@@ -90,158 +62,229 @@ function App() {
       const nextStream =
         await requestCameraStream(nextFacing);
       setStream(nextStream);
-    } catch (error) {
-      setCameraError(
-        error instanceof CameraAccessError
-          ? error.message
-          : 'تعذّر تبديل الكاميرا. حاول مرة أخرى.',
-      );
+    } catch (err) {
+      if (err instanceof CameraAccessError) {
+        setError(err.message);
+      } else {
+        setError('تعذر تبديل الكاميرا.');
+      }
     } finally {
       setLoading(false);
     }
   }, [facing]);
   return (
-    <div className="app-shell" dir="rtl">
-      <header className="topbar">
+    <main
+      dir="rtl"
+      style={{
+        minHeight: '100vh',
+        background: '#111',
+        color: '#fff',
+        fontFamily:
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+        padding: 16,
+      }}
+    >
+      <header
+        style={{
+          maxWidth: 900,
+          margin: '0 auto 20px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 16,
+        }}
+      >
         <div
-          className="topbar-inner"
           style={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: 16,
+            gap: 10,
+          }}
+        >
+          <ScanFace size={28} />
+          <div>
+            <h1
+              style={{
+                margin: 0,
+                fontSize: 20,
+              }}
+            >
+              مختبر الوضعية
+            </h1>
+            <div
+              style={{
+                marginTop: 3,
+                fontSize: 11,
+                opacity: 0.6,
+                letterSpacing: 1,
+                direction: 'ltr',
+              }}
+            >
+              YOLO26L POSE / STAGE 01
+            </div>
+          </div>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 7,
+            fontSize: 12,
+          }}
+        >
+          <span
+            style={{
+              width: 8,
+              height: 8,
+              borderRadius: '50%',
+              background: stream ? '#36d399' : '#777',
+              display: 'inline-block',
+            }}
+          />
+          {stream ? 'الكاميرا تعمل' : 'جاهز'}
+        </div>
+      </header>
+      <section
+        style={{
+          maxWidth: 900,
+          margin: '0 auto',
+        }}
+      >
+        <div
+          style={{
+            marginBottom: 16,
           }}
         >
           <div
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 11,
+              fontSize: 13,
+              opacity: 0.6,
+              marginBottom: 6,
             }}
           >
-            <div className="brand-mark">
-              <ScanFace
-                size={22}
-                strokeWidth={1.8}
-              />
-            </div>
-            <div>
-              <div
-                className="display"
-                style={{
-                  fontSize: 16,
-                  fontWeight: 700,
-                }}
-              >
-                مختبر الوضعية
-              </div>
-              <div
-                className="eyebrow"
-                style={{
-                  marginTop: 3,
-                  fontSize: 9,
-                }}
-              >
-                STAGE 01 / CAMERA LAB
-              </div>
-            </div>
+            تحليل محلي على الجهاز
           </div>
-          <div className="session-pill">
-            <span
-              className={`status-dot ${
-                stream ? 'live' : ''
-              }`}
-            />
-            {stream
-              ? 'جلسة محلية نشطة'
-              : 'جاهز للبدء'}
-          </div>
+          <h2
+            style={{
+              margin: 0,
+              fontSize: 30,
+              lineHeight: 1.2,
+            }}
+          >
+            كاميرا + YOLO26L
+            <br />
+            لا يوجد رفع للفيديو
+          </h2>
+          <p
+            style={{
+              marginTop: 10,
+              opacity: 0.7,
+              lineHeight: 1.7,
+            }}
+          >
+            يتم تشغيل نموذج الوضعية داخل المتصفح
+            باستخدام ONNX Runtime Web.
+          </p>
         </div>
-      </header>
-      <main className="page">
-        <div className="hero-intro fade-up">
-          <div>
-            <div className="eyebrow">
-              معاينة الحركة على الجهاز
-            </div>
-            <h1 className="display">
-              شاهد الوضعية،
-              <br />
-              بدون مغادرة الصورة.
-            </h1>
-            <p>
-              بث الكاميرا وطبقة التتبع يعملان
-              محلياً على هذا الجهاز. لا تسجيل،
-              لا رفع، ولا خطوة مخفية.
-            </p>
+        <CameraView
+          videoRef={videoRef}
+          stream={stream}
+          facing={facing}
+          active={Boolean(stream)}
+          loading={loading}
+          error={error}
+          onRetry={startCamera}
+        />
+        {error && (
+          <div
+            style={{
+              marginTop: 12,
+              padding: 12,
+              borderRadius: 10,
+              background: '#421b1b',
+              color: '#ffb4b4',
+            }}
+          >
+            {error}
           </div>
-          <div className="session-pill">
-            <ShieldCheck size={14} />
-            خصوصية الجهاز أولاً
-          </div>
-        </div>
-        <div className="lab-grid">
-          <div>
-            <div
-              style={{
-                position: 'relative',
-                width: '100%',
-              }}
+        )}
+        <div
+          style={{
+            display: 'flex',
+            gap: 10,
+            flexWrap: 'wrap',
+            marginTop: 16,
+          }}
+        >
+          {!stream ? (
+            <button
+              type="button"
+              onClick={startCamera}
+              disabled={loading}
+              style={buttonStyle}
             >
-              <CameraView
-                videoRef={videoRef}
-                stream={stream}
-                facing={facing}
-                active={Boolean(stream)}
-                loading={loading}
-                error={cameraError}
-                onRetry={startCamera}
-                onFrame={registerFrame}
-              />
-            </div>
-            <div className="footer-line fade-up delay-3">
-              <span>
-                <Eye size={14} />
-                المعاينة مؤقتة وتنتهي بإيقاف الكاميرا
-              </span>
-              <span className="mono">
-                v0.1 / LOCAL
-              </span>
-            </div>
-          </div>
-          <div className="panel-stack">
-            <StatusPanel
-              active={Boolean(stream)}
-              facing={facing}
-              browser={browser}
-              stats={stats}
-              error={cameraError}
-            />
-            <ControlPanel
-              active={Boolean(stream)}
-              loading={loading}
-              onStart={startCamera}
-              onStop={stopCamera}
-              onFlip={switchCamera}
-            />
-            <section className="support-note fade-up delay-3">
-              <Info
-                size={16}
-                style={{
-                  flexShrink: 0,
-                  marginTop: 2,
-                }}
-              />
-              <span>
-                لأفضل نتيجة، ضع الهاتف عمودياً
-                على بعد مترين تقريباً، واجعل كامل
-                الجسم داخل الإطار.
-              </span>
-            </section>
-          </div>
+              {loading ? (
+                <>
+                  <RefreshCcw size={16} />
+                  جاري التشغيل...
+                </>
+              ) : (
+                <>
+                  <Camera size={16} />
+                  تشغيل الكاميرا
+                </>
+              )}
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={stopCamera}
+              style={buttonStyle}
+            >
+              إيقاف الكاميرا
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={switchCamera}
+            disabled={loading}
+            style={buttonStyle}
+          >
+            تبديل الكاميرا
+          </button>
         </div>
-      </main>
-    </div>
+        <div
+          style={{
+            marginTop: 20,
+            padding: 14,
+            borderRadius: 12,
+            background: '#1b1b1b',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+            fontSize: 13,
+            opacity: 0.8,
+          }}
+        >
+          <ShieldCheck size={18} />
+          <span>
+            الفيديو والتحليل يعملان محلياً على الجهاز.
+          </span>
+        </div>
+      </section>
+    </main>
   );
 }
+const buttonStyle: React.CSSProperties = {
+  border: '1px solid #444',
+  background: '#222',
+  color: '#fff',
+  borderRadius: 10,
+  padding: '11px 16px',
+  cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  gap: 8,
+  fontSize: 14,
+};
 export default App;
