@@ -1,9 +1,13 @@
-import { AlertTriangle, Camera, RefreshCcw, ShieldCheck } from 'lucide-react';
+import {
+  AlertTriangle,
+  Camera,
+  RefreshCcw,
+  ShieldCheck,
+} from 'lucide-react';
 import type { RefObject } from 'react';
 import { useEffect } from 'react';
-import type { CameraFacing } from '@/lib/camera';
-import { PoseCanvas } from '@/components/PoseCanvas';
-
+import type { CameraFacing } from './camera';
+import { PoseCanvas } from './PoseCanvas';
 type CameraViewProps = {
   videoRef: RefObject<HTMLVideoElement | null>;
   stream: MediaStream | null;
@@ -14,7 +18,6 @@ type CameraViewProps = {
   onRetry: () => void;
   onFrame?: (latency: number) => void;
 };
-
 export function CameraView({
   videoRef,
   stream,
@@ -27,62 +30,250 @@ export function CameraView({
 }: CameraViewProps) {
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || !stream) return;
+    if (!video || !stream) {
+      return;
+    }
     video.srcObject = stream;
     void video.play().catch(() => undefined);
     return () => {
       video.srcObject = null;
     };
   }, [stream, videoRef]);
-
   return (
-    <section className="camera-card fade-up" aria-label="معاينة الكاميرا">
-      <div className="camera-stage">
+    <section
+      style={{
+        width: '100%',
+        borderRadius: 16,
+        overflow: 'hidden',
+        background: '#000',
+        border: '1px solid #333',
+      }}
+      aria-label="معاينة الكاميرا"
+    >
+      <div
+        style={{
+          position: 'relative',
+          width: '100%',
+          aspectRatio: '16 / 9',
+          background: '#000',
+          overflow: 'hidden',
+        }}
+      >
         {stream ? (
           <>
             <video
               ref={videoRef}
-              className={facing === 'user' ? 'mirrored' : ''}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                display: 'block',
+                transform:
+                  facing === 'user'
+                    ? 'scaleX(-1)'
+                    : 'none',
+              }}
               autoPlay
               muted
               playsInline
               aria-label="بث الكاميرا المباشر"
-              data-testid="video-camera"
             />
-            <PoseCanvas videoRef={videoRef} active={active} mirrored={facing === 'user'} onFrame={onFrame} />
-            <div className="stage-scrim" />
-            <div className="stage-topline">
-              <span className="stage-label"><span className="status-dot live pulse" /> بث مباشر</span>
-              <span className="stage-label">{facing === 'user' ? 'الأمامية' : 'الخلفية'}</span>
-            </div>
-            <div className="stage-bottomline">
-              <span className="stage-corner" />
-              <span className="mono" style={{ fontSize: 10, opacity: .72 }}>LOCAL / POSE</span>
-              <span className="stage-corner bottom" />
+            <PoseCanvas
+              videoRef={videoRef}
+              active={active}
+              mirrored={facing === 'user'}
+              onFrame={onFrame}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                top: 12,
+                left: 12,
+                right: 12,
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                pointerEvents: 'none',
+                zIndex: 100,
+              }}
+            >
+              <span
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 7,
+                  padding: '7px 10px',
+                  borderRadius: 8,
+                  background: 'rgba(0,0,0,.65)',
+                  color: '#fff',
+                  fontSize: 12,
+                }}
+              >
+                <span
+                  style={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: '50%',
+                    background: '#36d399',
+                  }}
+                />
+                بث مباشر
+              </span>
+              <span
+                style={{
+                  padding: '7px 10px',
+                  borderRadius: 8,
+                  background: 'rgba(0,0,0,.65)',
+                  color: '#fff',
+                  fontSize: 12,
+                }}
+              >
+                {facing === 'user'
+                  ? 'الكاميرا الأمامية'
+                  : 'الكاميرا الخلفية'}
+              </span>
             </div>
           </>
         ) : (
-          <div className="camera-empty">
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center',
+              padding: 20,
+              color: '#fff',
+            }}
+          >
             <div>
-              <div className="empty-orb">{loading ? <RefreshCcw className="pulse" size={27} /> : <Camera size={27} />}</div>
-              <h2>{loading ? 'جاري فتح الكاميرا' : 'المعاينة متوقفة'}</h2>
-              <p>{loading ? 'امنح Safari لحظات قليلة لتهيئة البث المحلي.' : 'ابدأ الجلسة لرؤية الكاميرا وطبقة الوضعية على جهازك.'}</p>
+              <div
+                style={{
+                  width: 64,
+                  height: 64,
+                  margin: '0 auto 16px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  background: '#222',
+                }}
+              >
+                {loading ? (
+                  <RefreshCcw
+                    size={27}
+                    style={{
+                      animation:
+                        'spin 1s linear infinite',
+                    }}
+                  />
+                ) : (
+                  <Camera size={27} />
+                )}
+              </div>
+              <h2
+                style={{
+                  margin: '0 0 8px',
+                  fontSize: 20,
+                }}
+              >
+                {loading
+                  ? 'جاري فتح الكاميرا'
+                  : 'المعاينة متوقفة'}
+              </h2>
+              <p
+                style={{
+                  margin: 0,
+                  opacity: 0.65,
+                  lineHeight: 1.6,
+                  fontSize: 14,
+                }}
+              >
+                {loading
+                  ? 'امنح Safari لحظات قليلة لتهيئة الكاميرا.'
+                  : 'اضغط تشغيل الكاميرا لبدء المعاينة.'}
+              </p>
             </div>
           </div>
         )}
         {error && (
-          <div className="stage-error" role="alert" data-testid="status-camera-error">
-            <AlertTriangle size={17} />
-            <span>{error}</span>
-            <button type="button" onClick={onRetry} className="control-button dark small" data-testid="button-retry-camera">
+          <div
+            role="alert"
+            style={{
+              position: 'absolute',
+              left: 12,
+              right: 12,
+              bottom: 12,
+              zIndex: 200,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 10,
+              padding: 12,
+              borderRadius: 10,
+              background: 'rgba(90,20,20,.95)',
+              color: '#fff',
+              fontSize: 13,
+            }}
+          >
+            <AlertTriangle
+              size={17}
+              style={{ flexShrink: 0 }}
+            />
+            <span style={{ flex: 1 }}>
+              {error}
+            </span>
+            <button
+              type="button"
+              onClick={onRetry}
+              disabled={loading}
+              style={{
+                border: '1px solid rgba(255,255,255,.25)',
+                background: 'rgba(255,255,255,.1)',
+                color: '#fff',
+                borderRadius: 7,
+                padding: '7px 10px',
+                fontSize: 12,
+              }}
+            >
               إعادة المحاولة
             </button>
           </div>
         )}
       </div>
-      <div className="camera-toolbar">
-        <span className="stage-label"><ShieldCheck size={14} /> لا يغادر الفيديو جهازك</span>
-        <span className="mono" style={{ color: 'rgb(236 241 233 / .58)', fontSize: 10 }}>SECURE PREVIEW</span>
+      <div
+        style={{
+          minHeight: 44,
+          padding: '10px 14px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 10,
+          background: '#171717',
+          color: '#fff',
+          fontSize: 12,
+        }}
+      >
+        <span
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 7,
+            opacity: 0.8,
+          }}
+        >
+          <ShieldCheck size={14} />
+          التحليل محلي على الجهاز
+        </span>
+        <span
+          style={{
+            opacity: 0.45,
+            fontSize: 10,
+            letterSpacing: 0.5,
+          }}
+        >
+          YOLO26L / ONNX
+        </span>
       </div>
     </section>
   );
