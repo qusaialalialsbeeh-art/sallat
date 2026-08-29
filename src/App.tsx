@@ -11,24 +11,22 @@ import {
   ScanFace,
   ShieldCheck,
 } from 'lucide-react';
-import { CameraView } from '@/components/CameraView';
-import { PoseCanvas } from '@/components/PoseCanvas';
-import { ControlPanel } from '@/components/ControlPanel';
-import { StatusPanel } from '@/components/StatusPanel';
+import { CameraView } from './CameraView';
+import { ControlPanel } from './ControlPanel';
+import { StatusPanel } from './StatusPanel';
 import {
   CameraAccessError,
   type CameraFacing,
   requestCameraStream,
   stopCameraStream,
-} from '@/lib/camera';
+} from './camera';
 import {
   getBrowserSnapshot,
   usePerformanceStats,
-} from '@/lib/performance';
+} from './performance';
 import './index.css';
 function App() {
-  const videoRef =
-    useRef<HTMLVideoElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const [stream, setStream] =
     useState<MediaStream | null>(null);
   const [facing, setFacing] =
@@ -39,83 +37,71 @@ function App() {
     useState('');
   const [stats, registerFrame] =
     usePerformanceStats(Boolean(stream));
-  const browser =
-    useMemo(
-      () => getBrowserSnapshot(),
-      [],
-    );
+  const browser = useMemo(
+    () => getBrowserSnapshot(),
+    [],
+  );
   useEffect(() => {
-    document.title =
-      'مراقب الوضعية — مختبر الصلاة';
+    document.title = 'مراقب الوضعية — مختبر الصلاة';
     return () => {
       stopCameraStream(stream);
     };
   }, [stream]);
-  const startCamera =
-    useCallback(async () => {
-      setLoading(true);
-      setCameraError('');
-      try {
-        const nextStream =
-          await requestCameraStream(
-            facing,
-          );
-        setStream((previous) => {
-          stopCameraStream(previous);
-          return nextStream;
-        });
-      } catch (error) {
-        setCameraError(
-          error instanceof CameraAccessError
-            ? error.message
-            : 'تعذّر تشغيل الكاميرا. تحقق من الأذونات وحاول مرة أخرى.',
-        );
-      } finally {
-        setLoading(false);
-      }
-    }, [facing]);
-  const stopCamera =
-    useCallback(() => {
-      setStream((current) => {
-        stopCameraStream(current);
-        return null;
+  const startCamera = useCallback(async () => {
+    setLoading(true);
+    setCameraError('');
+    try {
+      const nextStream =
+        await requestCameraStream(facing);
+      setStream((previous) => {
+        stopCameraStream(previous);
+        return nextStream;
       });
-      setCameraError('');
-    }, []);
-  const switchCamera =
-    useCallback(async () => {
-      const nextFacing: CameraFacing =
-        facing === 'environment'
-          ? 'user'
-          : 'environment';
-      setLoading(true);
-      setCameraError('');
-      setStream((current) => {
-        stopCameraStream(current);
-        return null;
-      });
-      setFacing(nextFacing);
-      try {
-        const nextStream =
-          await requestCameraStream(
-            nextFacing,
-          );
-        setStream(nextStream);
-      } catch (error) {
-        setCameraError(
-          error instanceof CameraAccessError
-            ? error.message
-            : 'تعذّر تبديل الكاميرا. حاول مرة أخرى.',
-        );
-      } finally {
-        setLoading(false);
-      }
-    }, [facing]);
+    } catch (error) {
+      setCameraError(
+        error instanceof CameraAccessError
+          ? error.message
+          : 'تعذّر تشغيل الكاميرا. تحقق من الأذونات وحاول مرة أخرى.',
+      );
+    } finally {
+      setLoading(false);
+    }
+  }, [facing]);
+  const stopCamera = useCallback(() => {
+    setStream((current) => {
+      stopCameraStream(current);
+      return null;
+    });
+    setCameraError('');
+  }, []);
+  const switchCamera = useCallback(async () => {
+    const nextFacing: CameraFacing =
+      facing === 'environment'
+        ? 'user'
+        : 'environment';
+    setLoading(true);
+    setCameraError('');
+    setStream((current) => {
+      stopCameraStream(current);
+      return null;
+    });
+    setFacing(nextFacing);
+    try {
+      const nextStream =
+        await requestCameraStream(nextFacing);
+      setStream(nextStream);
+    } catch (error) {
+      setCameraError(
+        error instanceof CameraAccessError
+          ? error.message
+          : 'تعذّر تبديل الكاميرا. حاول مرة أخرى.',
+      );
+    } finally {
+      setLoading(false);
+    }
+  }, [facing]);
   return (
-    <div
-      className="app-shell"
-      dir="rtl"
-    >
+    <div className="app-shell" dir="rtl">
       <header className="topbar">
         <div
           className="topbar-inner"
@@ -196,18 +182,6 @@ function App() {
         </div>
         <div className="lab-grid">
           <div>
-            {/*
-             * ==================================================
-             * CAMERA + REAL YOLO POSE OVERLAY
-             * ==================================================
-             *
-             * CameraView يعرض الكاميرا.
-             *
-             * PoseCanvas يأخذ نفس videoRef
-             * ويرسم نقاط YOLO26L فوق الكاميرا.
-             *
-             * لا نغير CameraView ولا تصميم الصفحة.
-             */}
             <div
               style={{
                 position: 'relative',
@@ -222,12 +196,6 @@ function App() {
                 loading={loading}
                 error={cameraError}
                 onRetry={startCamera}
-                onFrame={registerFrame}
-              />
-              <PoseCanvas
-                videoRef={videoRef}
-                active={Boolean(stream)}
-                mirrored={facing === 'user'}
                 onFrame={registerFrame}
               />
             </div>
