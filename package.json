@@ -1,0 +1,30 @@
+{
+  "name": "sallat",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "echo '=== ONNX RUNTIME DIST FILES ===' && find node_modules/onnxruntime-web/dist -maxdepth 1 -type f -printf '%f\n' && echo '=== END ONNX FILES ===' && vite build",
+    "serve": "vite preview --host 0.0.0.0",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.4.1",
+    "@tailwindcss/vite": "^4.1.11",
+    "@types/node": "^22.13.4",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.4.7",
+    "lucide-react": "^0.511.0",
+    "onnxruntime-web": "^1.29.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.7.3",
+    "vite": "^7.3.6",
+    "wouter": "^3.3.5"
+  }
+}
