@@ -1,0 +1,14 @@
+# Secrets / environment
+.env
+.env.*
+*.env
+secrets.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Analysis scratch output
+analysis/__pycache__/

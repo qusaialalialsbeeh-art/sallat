@@ -1,0 +1,463 @@
+{
+  "n_rakah": 3,
+  "total_frames": 10788,
+  "sujud_episodes": [
+    {
+      "start_frame": 2939,
+      "end_frame": 3438,
+      "length": 500
+    },
+    {
+      "start_frame": 3641,
+      "end_frame": 3951,
+      "length": 311
+    },
+    {
+      "start_frame": 5749,
+      "end_frame": 5996,
+      "length": 248
+    },
+    {
+      "start_frame": 6186,
+      "end_frame": 6433,
+      "length": 248
+    },
+    {
+      "start_frame": 8660,
+      "end_frame": 8866,
+      "length": 207
+    },
+    {
+      "start_frame": 9025,
+      "end_frame": 9281,
+      "length": 257
+    }
+  ],
+  "segments": [
+    {
+      "label": "رفع اليدين لتكبيرة الإحرام",
+      "start_frame": 1,
+      "end_frame": 20,
+      "confidence": 0.44799304599079975,
+      "min_confidence": 0.15482182506516862,
+      "length": 20
+    },
+    {
+      "label": "القيام-الركعة الأولى",
+      "start_frame": 21,
+      "end_frame": 2287,
+      "confidence": 0.776016627476414,
+      "min_confidence": 0.19504195454162965,
+      "length": 2267
+    },
+    {
+      "label": "انحناء للركوع - الركعة الأولى",
+      "start_frame": 2288,
+      "end_frame": 2380,
+      "confidence": 0.5125831385481623,
+      "min_confidence": 0.18031976276082323,
+      "length": 93
+    },
+    {
+      "label": "ركوع - الركعة الأولى",
+      "start_frame": 2381,
+      "end_frame": 2634,
+      "confidence": 0.9486938317128311,
+      "min_confidence": 0.3712128122138786,
+      "length": 254
+    },
+    {
+      "label": "الرفع من الركوع - الركعة الأولى",
+      "start_frame": 2635,
+      "end_frame": 2657,
+      "confidence": 0.7253633846118154,
+      "min_confidence": 0.3027040717791076,
+      "length": 23
+    },
+    {
+      "label": "اعتدال-الركعة الأولى",
+      "start_frame": 2658,
+      "end_frame": 2872,
+      "confidence": 0.9655157781891941,
+      "min_confidence": 0.4992573258674995,
+      "length": 215
+    },
+    {
+      "label": "نزول للسجود - الركعة الأولى",
+      "start_frame": 2873,
+      "end_frame": 3004,
+      "confidence": 0.47869946570931415,
+      "min_confidence": 0.11680542381789583,
+      "length": 132
+    },
+    {
+      "label": "سجود أول - الركعة الأولى",
+      "start_frame": 3005,
+      "end_frame": 3423,
+      "confidence": 0.5297399022822546,
+      "min_confidence": 0.17362544696889376,
+      "length": 419
+    },
+    {
+      "label": "الرفع من السجود - الركعة الأولى",
+      "start_frame": 3424,
+      "end_frame": 3481,
+      "confidence": 0.39875065361182926,
+      "min_confidence": 0.14109351158535824,
+      "length": 58
+    },
+    {
+      "label": "جلسة بين السجدتين - الركعة الأولى",
+      "start_frame": 3482,
+      "end_frame": 3611,
+      "confidence": 0.6444653606207702,
+      "min_confidence": 0.17369938715183184,
+      "length": 130
+    },
+    {
+      "label": "نزول للسجدة الثانية - الركعة الأولى",
+      "start_frame": 3612,
+      "end_frame": 3661,
+      "confidence": 0.6386558722079956,
+      "min_confidence": 0.1369220761846617,
+      "length": 50
+    },
+    {
+      "label": "سجود ثاني - الركعة الأولى",
+      "start_frame": 3662,
+      "end_frame": 3930,
+      "confidence": 0.45727429946103826,
+      "min_confidence": 0.18781718801654948,
+      "length": 269
+    },
+    {
+      "label": "النهوض من السجود الثاني إلى القيام -للركعة الثانية",
+      "start_frame": 3931,
+      "end_frame": 4086,
+      "confidence": 0.6173310691696693,
+      "min_confidence": 0.14907758721579575,
+      "length": 156
+    },
+    {
+      "label": "القيام-الركعة الثانية",
+      "start_frame": 4087,
+      "end_frame": 5069,
+      "confidence": 0.8725173114045509,
+      "min_confidence": 0.2599470833109207,
+      "length": 983
+    },
+    {
+      "label": "انحناء للركوع - الركعة الثانية",
+      "start_frame": 5070,
+      "end_frame": 5177,
+      "confidence": 0.6119404924142451,
+      "min_confidence": 0.2317171461903951,
+      "length": 108
+    },
+    {
+      "label": "ركوع - الركعة الثانية",
+      "start_frame": 5178,
+      "end_frame": 5394,
+      "confidence": 0.9428942484050435,
+      "min_confidence": 0.43945812636590553,
+      "length": 217
+    },
+    {
+      "label": "الرفع من الركوع - الركعة الثانية",
+      "start_frame": 5395,
+      "end_frame": 5420,
+      "confidence": 0.7261400564347121,
+      "min_confidence": 0.3298559601703004,
+      "length": 26
+    },
+    {
+      "label": "اعتدال-الركعة الثانية",
+      "start_frame": 5421,
+      "end_frame": 5659,
+      "confidence": 0.8248572948364463,
+      "min_confidence": 0.16624513402421723,
+      "length": 239
+    },
+    {
+      "label": "نزول للسجود - الركعة الثانية",
+      "start_frame": 5660,
+      "end_frame": 5782,
+      "confidence": 0.6589040315980068,
+      "min_confidence": 0.11494439885557187,
+      "length": 123
+    },
+    {
+      "label": "سجود أول - الركعة الثانية",
+      "start_frame": 5783,
+      "end_frame": 5980,
+      "confidence": 0.5067332528962603,
+      "min_confidence": 0.2061201047150498,
+      "length": 198
+    },
+    {
+      "label": "الرفع من السجود - الركعة الثانية",
+      "start_frame": 5981,
+      "end_frame": 6027,
+      "confidence": 0.47082339661442696,
+      "min_confidence": 0.16617212436371795,
+      "length": 47
+    },
+    {
+      "label": "جلسة بين السجدتين - الركعة الثانية",
+      "start_frame": 6028,
+      "end_frame": 6166,
+      "confidence": 0.3125885803224563,
+      "min_confidence": 0.11549869840068676,
+      "length": 139
+    },
+    {
+      "label": "نزول للسجدة الثانية - الركعة الثانية",
+      "start_frame": 6167,
+      "end_frame": 6204,
+      "confidence": 0.6986403769217293,
+      "min_confidence": 0.23156793409025517,
+      "length": 38
+    },
+    {
+      "label": "سجود ثاني - الركعة الثانية",
+      "start_frame": 6205,
+      "end_frame": 6406,
+      "confidence": 0.3729587544643904,
+      "min_confidence": 0.20455019868337562,
+      "length": 202
+    },
+    {
+      "label": "الرفع من السجود الثاني-الركعة الثانية",
+      "start_frame": 6407,
+      "end_frame": 6516,
+      "confidence": 0.636749055260073,
+      "min_confidence": 0.18382044969321515,
+      "length": 110
+    },
+    {
+      "label": "الجلوس للتشهد الأول",
+      "start_frame": 6517,
+      "end_frame": 7213,
+      "confidence": 0.721743535771404,
+      "min_confidence": 0.3001075587859816,
+      "length": 697
+    },
+    {
+      "label": "النهوض للقيام-الركعة الثالثة",
+      "start_frame": 7214,
+      "end_frame": 7311,
+      "confidence": 0.5901160524418158,
+      "min_confidence": 0.19368980815730222,
+      "length": 98
+    },
+    {
+      "label": "القيام-الركعة الثالثة",
+      "start_frame": 7312,
+      "end_frame": 8108,
+      "confidence": 0.6553820034156064,
+      "min_confidence": 0.12143253736635817,
+      "length": 797
+    },
+    {
+      "label": "انحناء للركوع - الركعة الثالثة",
+      "start_frame": 8109,
+      "end_frame": 8156,
+      "confidence": 0.6712263984478118,
+      "min_confidence": 0.2036654672555658,
+      "length": 48
+    },
+    {
+      "label": "ركوع - الركعة الثالثة",
+      "start_frame": 8157,
+      "end_frame": 8328,
+      "confidence": 0.9444431896337518,
+      "min_confidence": 0.21119121277515088,
+      "length": 172
+    },
+    {
+      "label": "الرفع من الركوع - الركعة الثالثة",
+      "start_frame": 8329,
+      "end_frame": 8352,
+      "confidence": 0.7605025794521437,
+      "min_confidence": 0.23389058661664808,
+      "length": 24
+    },
+    {
+      "label": "اعتدال-الركعة الثالثة",
+      "start_frame": 8353,
+      "end_frame": 8564,
+      "confidence": 0.9217460259432505,
+      "min_confidence": 0.18766620079506657,
+      "length": 212
+    },
+    {
+      "label": "نزول للسجود - الركعة الثالثة",
+      "start_frame": 8565,
+      "end_frame": 8687,
+      "confidence": 0.6499836218180671,
+      "min_confidence": 0.19726002193891817,
+      "length": 123
+    },
+    {
+      "label": "سجود أول - الركعة الثالثة",
+      "start_frame": 8688,
+      "end_frame": 8850,
+      "confidence": 0.42065140709571824,
+      "min_confidence": 0.2713969692912361,
+      "length": 163
+    },
+    {
+      "label": "الرفع من السجود - الركعة الثالثة",
+      "start_frame": 8851,
+      "end_frame": 8886,
+      "confidence": 0.4115101290143287,
+      "min_confidence": 0.18500271354781606,
+      "length": 36
+    },
+    {
+      "label": "جلسة بين السجدتين - الركعة الثالثة",
+      "start_frame": 8887,
+      "end_frame": 9008,
+      "confidence": 0.5909406879873941,
+      "min_confidence": 0.27157178328755754,
+      "length": 122
+    },
+    {
+      "label": "نزول للسجدة الثانية - الركعة الثالثة",
+      "start_frame": 9009,
+      "end_frame": 9043,
+      "confidence": 0.6981826058611649,
+      "min_confidence": 0.2748161228821104,
+      "length": 35
+    },
+    {
+      "label": "سجود ثاني - الركعة الثالثة",
+      "start_frame": 9044,
+      "end_frame": 9258,
+      "confidence": 0.37264403725318374,
+      "min_confidence": 0.2078138027406348,
+      "length": 215
+    },
+    {
+      "label": "الرفع من السجود الثاني-الركعة الثالثة",
+      "start_frame": 9259,
+      "end_frame": 9303,
+      "confidence": 0.40192711582860274,
+      "min_confidence": 0.16493468198947145,
+      "length": 45
+    },
+    {
+      "label": "الجلوس للتشهد الأخير",
+      "start_frame": 9304,
+      "end_frame": 10643,
+      "confidence": 0.97660728338702,
+      "min_confidence": 0.3192175792637693,
+      "length": 1340
+    },
+    {
+      "label": "التسليم",
+      "start_frame": 10644,
+      "end_frame": 10788,
+      "confidence": 0.6246267972700704,
+      "min_confidence": 0.29336124711276346,
+      "length": 145
+    }
+  ],
+  "uncertain_boundaries": [
+    {
+      "start_frame": 6,
+      "end_frame": 36,
+      "mean_confidence": 0.47707493167195936
+    },
+    {
+      "start_frame": 2273,
+      "end_frame": 2303,
+      "mean_confidence": 0.5041995729920644
+    },
+    {
+      "start_frame": 2990,
+      "end_frame": 3020,
+      "mean_confidence": 0.49412900791302783
+    },
+    {
+      "start_frame": 3409,
+      "end_frame": 3439,
+      "mean_confidence": 0.37060723213109376
+    },
+    {
+      "start_frame": 3467,
+      "end_frame": 3497,
+      "mean_confidence": 0.3537209057431458
+    },
+    {
+      "start_frame": 3597,
+      "end_frame": 3627,
+      "mean_confidence": 0.5047990799192634
+    },
+    {
+      "start_frame": 3647,
+      "end_frame": 3677,
+      "mean_confidence": 0.49583229109021915
+    },
+    {
+      "start_frame": 3916,
+      "end_frame": 3946,
+      "mean_confidence": 0.460353251958847
+    },
+    {
+      "start_frame": 4072,
+      "end_frame": 4102,
+      "mean_confidence": 0.5361590214080332
+    },
+    {
+      "start_frame": 5768,
+      "end_frame": 5798,
+      "mean_confidence": 0.4961309956644017
+    },
+    {
+      "start_frame": 5966,
+      "end_frame": 5996,
+      "mean_confidence": 0.47785730380535063
+    },
+    {
+      "start_frame": 6152,
+      "end_frame": 6182,
+      "mean_confidence": 0.5376350407003702
+    },
+    {
+      "start_frame": 6190,
+      "end_frame": 6220,
+      "mean_confidence": 0.47678269112163424
+    },
+    {
+      "start_frame": 6392,
+      "end_frame": 6422,
+      "mean_confidence": 0.33968180339596205
+    },
+    {
+      "start_frame": 8094,
+      "end_frame": 8124,
+      "mean_confidence": 0.5269449524615715
+    },
+    {
+      "start_frame": 8673,
+      "end_frame": 8703,
+      "mean_confidence": 0.38160480496276095
+    },
+    {
+      "start_frame": 8836,
+      "end_frame": 8866,
+      "mean_confidence": 0.4949893718130243
+    },
+    {
+      "start_frame": 9029,
+      "end_frame": 9059,
+      "mean_confidence": 0.44776702825037684
+    },
+    {
+      "start_frame": 9244,
+      "end_frame": 9274,
+      "mean_confidence": 0.4337736577890452
+    }
+  ]
+}
